@@ -9,6 +9,7 @@ class Player{
 			this.img  = new Image();
 			this.img.src = "images/players/timon.png";
 			this.isMove = false;
+			this.isJump = false;
 			this.direction = "right";
 	}
 
@@ -18,20 +19,42 @@ class Player{
 	}
 
 	move(){
-		if(this.isMove){
-			console.log("Move true");
+		if(this.isMove || this.isJump){
 			switch(this.direction){
 				case "right":
 					this.x += 10;
-					console.log(this.direction);
 					break;
 				case "left":
-					this.x -=10;
-					console.log(this.direction);
+					this.x -= 10;
+					break;
+				case "down":
+					//this.y += 10;
+					break;
+				case "up":
+					if(this.y > 400){
+						this.y -= 20;
+					}else{
+						this.isJump = false;
+					}
+					break;
+				case "up-right":
+					this.x += 10;
+					if(this.y > 400){
+						this.y -= 20;
+					}else{
+						this.isJump = false;
+					}	
 					break;
 			}
 		}
 	}
+
+	gravitation() {
+		if(this.y < 581 ) {
+			this.y += 10;
+		}
+	}
+
 
 
 }

@@ -1,0 +1,7 @@
+Player
+	isJump = false при player.y >= 581;	
+	isJupm = true при player.y < 581;
+
+	move().up if(isJump) {player.y -= 50}
+
+	

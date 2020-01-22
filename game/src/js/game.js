@@ -12,7 +12,8 @@ class Game{
 	run(){
 		setInterval(() => {
 			this.drawBackground();
-			this.player.move();
+			this.player.gravitation();
+			this.player.move(); 
 			this.player.drawPlayer();
 		}, 100);
 		
@@ -48,6 +49,19 @@ class Game{
 				this.player.isMove = true;
 				this.player.direction = "left";
 				break;
+			case "W":
+				this.player.isJump = true;
+				this.player.direction = "up";
+				break;
+			case "S":
+				this.player.isMove = true;
+				this.player.direction = "down";
+				break;
+			case "E":
+				this.player.isJump = true;
+				this.player.isMove = true;
+				this.player.direction = "up-right"
+				break;
 		}
 	}
 	checkKeyUp(e){
@@ -59,6 +73,19 @@ class Game{
 				break;
 			case "A":
 				this.player.isMove = false;
+				break;
+			case "W":
+				if(this.player.y == 581)
+				this.player.isJump = false;
+				break;
+			case "S":
+				this.player.isMove = false;
+				break;
+			case "E":
+				if(this.player.y == 581) {
+					this.player.isJump = false;
+					this.player.isMove = false;
+				}
 				break;
 		}
 	}
