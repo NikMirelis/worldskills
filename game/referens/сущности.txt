@@ -1,0 +1,37 @@
+1. Игрок - Player
+	HP
+	view
+	PlayerName
+2. Враги - Emmet
+	view
+	damage (-30 hp every second)
+	distantion move max-500px
+3. Хиллеры - Healer
+	view
+	heal (+5hp)
+	max-2
+	spawn on hill
+4. Interface
+	PlayerName
+	HP-bar
+	amount-heals
+	timer
+	4.1Sсreens
+		start-screen
+		instraction
+		choose view player
+		cartoon	scene
+			skip scene
+		pause
+		results
+
+5. Map
+	Hill (min-10 in start)
+
+6. Anuthor
+	SoundTrack
+7. Functions
+	-1 hp/s
+
+
+	
