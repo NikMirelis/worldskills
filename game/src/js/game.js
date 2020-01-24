@@ -1,10 +1,13 @@
 class Game{
 	constructor(){
-		let canvas = document.getElementById("game");
+		var canvas = document.getElementById("game");
 		this.painter = canvas.getContext("2d");
-		this.player = new Player(this.painter, 100, "Тимон", "test");
+		
+		this.player = new Player(this.painter);
+
 		this.bg = new Image();
 		this.bg.src = "images/background.png";
+
 		document.addEventListener("keydown", this.checkKeyDown.bind(this), false);
 		document.addEventListener("keyup", this.checkKeyUp.bind(this), false);
 	}
@@ -12,8 +15,9 @@ class Game{
 	run(){
 		setInterval(() => {
 			this.drawBackground();
-			this.player.drawPlayer();
-		}, 100);
+			//this.painter.clearRect(0, 0, this.painter.canvas.whidt, this,this.painter.canvas.height)
+			this.player.movePlayer();
+		}, 10);
 		
 	}
 
@@ -35,32 +39,32 @@ class Game{
 
 		switch(keyDown) {
 			case "D" || 68:
-				this.player.isMove = true;
+				this.player.rightPressed = true;
 				break;
 			case "A" || 65:
-				this.player.isMove = true;
+				this.player.leftPressed = true;
 				break;
 			case "W" || 87:
-				this.player.isJump = true;
+				this.player.upPressed = true;
 				break;
 			case "S" || 83:
-				this.player.isMove = true;
+				this.player.downPressed = true;
 				break;
 		}
 	}
-	
+
 	checkKeyUp(e){
 		let keyId = e.keycode || e.which;
 		let keyUp = String.fromCharCode(keyId);
 		switch(keyUp) {
 			case "D" || "68":
-				this.player.isMove = false;
+				this.player.rightPressed = false;
 				break;
 			case "A" || 65:
-				this.player.isMove = false;
+				this.player.leftPressed = false;
 				break;
 			case "S" || 83:
-				this.player.isMove = false;
+				this.player.downPressed = false;
 				break;
 		}
 	}
