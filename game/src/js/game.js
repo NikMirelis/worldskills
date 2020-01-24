@@ -12,14 +12,9 @@ class Game{
 	run(){
 		setInterval(() => {
 			this.drawBackground();
-			this.player.gravitation();
-			this.player.move(); 
 			this.player.drawPlayer();
 		}, 100);
 		
-	}
-	drawPrint() {
-		this.painter.fillText("Работает", 10, 50);
 	}
 
 	drawBackground(){
@@ -37,55 +32,35 @@ class Game{
 	checkKeyDown(e){
 		let keyId = e.keycode || e.which;
 		let keyDown = String.fromCharCode(keyId);
-		if(keyDown) {
 
-		}
 		switch(keyDown) {
-			case "D":
+			case "D" || 68:
 				this.player.isMove = true;
-				this.player.direction = "right";
 				break;
-			case "A":
+			case "A" || 65:
 				this.player.isMove = true;
-				this.player.direction = "left";
 				break;
-			case "W":
+			case "W" || 87:
 				this.player.isJump = true;
-				this.player.direction = "up";
 				break;
-			case "S":
+			case "S" || 83:
 				this.player.isMove = true;
-				this.player.direction = "down";
-				break;
-			case "E":
-				this.player.isJump = true;
-				this.player.isMove = true;
-				this.player.direction = "up-right"
 				break;
 		}
 	}
+	
 	checkKeyUp(e){
 		let keyId = e.keycode || e.which;
 		let keyUp = String.fromCharCode(keyId);
 		switch(keyUp) {
-			case "D":
+			case "D" || "68":
 				this.player.isMove = false;
 				break;
-			case "A":
+			case "A" || 65:
 				this.player.isMove = false;
 				break;
-			case "W":
-				if(this.player.y == 581)
-				this.player.isJump = false;
-				break;
-			case "S":
+			case "S" || 83:
 				this.player.isMove = false;
-				break;
-			case "E":
-				if(this.player.y == 581) {
-					this.player.isJump = false;
-					this.player.isMove = false;
-				}
 				break;
 		}
 	}
