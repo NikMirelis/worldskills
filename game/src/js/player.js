@@ -1,6 +1,9 @@
 class Player{
 	constructor(painter){
-	
+		
+		this.hp = 100;
+		console.log(this.hp);
+
 		this.leftPressed = false;
 		this.rightPressed = false;
 		this.upPressed = false;
@@ -14,6 +17,8 @@ class Player{
 
 		this.playerX = 0;
 		this.playerY = 109;
+
+		this.true = true;
 	
 		this.painter = painter;
 		this.img  = new Image();

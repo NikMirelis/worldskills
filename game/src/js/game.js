@@ -18,9 +18,28 @@ class Game{
 			this.painter.clearRect(0,0, 1280, 720);
 			this.drawBackground();
 			this.player.movePlayer();
+			this.enemy.checkDistanceToPlayer(this.player.playerX);
 			this.enemy.drawEnemy();
-		}, 10);
-		
+
+		}, 20);
+
+	}
+
+	checkColisionPlayer(object){
+		let xColl, yColl;
+		if ((object.x + object.width >= this.player.playerX) && (object.x <= this.player.playerX + this.player.width)){
+			xColl = true;
+			alrt('X');
+		}
+		if ((object.y + object.height >= this.player.playerY) && (object.y <= this.player.playerY + this.player.height)){
+			yColl = true;
+			alrt('Y');
+		}
+		if (xColl && yColl){
+			alrt('X+Y');
+			return true;
+		}
+		return false;
 	}
 
 	drawBackground(){
