@@ -4,6 +4,7 @@ class Game{
 		this.painter = canvas.getContext("2d");
 		
 		this.player = new Player(this.painter);
+		this.enemy = new Enemy(this.painter);
 
 		this.bg = new Image();
 		this.bg.src = "images/background.png";
@@ -14,9 +15,10 @@ class Game{
 
 	run(){
 		setInterval(() => {
+			this.painter.clearRect(0,0, 1280, 720);
 			this.drawBackground();
-			//this.painter.clearRect(0, 0, this.painter.canvas.whidt, this,this.painter.canvas.height)
 			this.player.movePlayer();
+			this.enemy.drawEnemy();
 		}, 10);
 		
 	}
