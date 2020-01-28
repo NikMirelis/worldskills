@@ -11,6 +11,18 @@ class Game{
 
 		document.addEventListener("keydown", this.checkKeyDown.bind(this), false);
 		document.addEventListener("keyup", this.checkKeyUp.bind(this), false);
+
+		this.bgMove = true;
+		this.topX = 1280;
+		this.topY = 0;
+		this.x = 0;
+		this.y = 0;
+	}
+
+	damagePerSecond(){
+		setInterval(() => {
+				this.attackPerSecond();
+		}, 1000);
 	}
 
 	run(){
@@ -18,32 +30,83 @@ class Game{
 			this.painter.clearRect(0,0, 1280, 720);
 			this.drawBackground();
 			this.player.movePlayer();
-			this.enemy.checkDistanceToPlayer(this.player.playerX);
+			this.stopPlayer();
 			this.enemy.drawEnemy();
-
+			this.endGame();
+			this.attack();
+			this.endGame();
+			this.drawHP();
 		}, 20);
 
 	}
 
-	checkColisionPlayer(object){
+	checkCollisionPlayer(object){
 		let xColl, yColl;
-		if ((object.x + object.width >= this.player.playerX) && (object.x <= this.player.playerX + this.player.width)){
+		if ((this.player.x + this.player.widht >= object.x) && (this.player.x <= object.x + object.width)){
 			xColl = true;
-			alrt('X');
 		}
-		if ((object.y + object.height >= this.player.playerY) && (object.y <= this.player.playerY + this.player.height)){
+		if ((this.player.playerY >= object.y) && (this.player.jumpHeight < 60)){
 			yColl = true;
-			alrt('Y');
 		}
 		if (xColl && yColl){
-			alrt('X+Y');
 			return true;
 		}
 		return false;
 	}
 
+	stopPlayer() {
+		if(this.player.x >= ((this.painter.canvas.width-this.player.widht)/2)) {
+			this.player.x -= 7;
+			this.scrollBg();
+		}
+		if(!this.bgMove){
+			this.player.x +=7;
+		}
+	}
+
+	scrollBg(){
+			this.x -= 7;
+			this.bgMove = true;
+			if(this.x <= -1280){
+				this.x += 7;
+				this.bgMove = false;
+			}
+	}
+
+	attackPerSecond(){
+		this.player.hp -= 1;
+		if(game.checkCollisionPlayer(this.enemy)){
+		this.player.hp -= 30;
+		}
+	}
+
+	attack(){
+		if(game.checkCollisionPlayer(this.enemy) && !this.player.collEnemy){
+			this.player.collEnemy = true;
+			this.player.hp -= 30;
+		}
+		if(game.checkCollisionPlayer(this.enemy) == false){
+			this.player.collEnemy = false;
+		}
+	}
+
+	drawHP() {
+		this.painter.fillStyle = "red";
+    this.painter.font = 'bold 30px sans-serif';        
+		this.painter.fillText("HP:" + this.player.hp, 100, 710);
+	}
+
+	endGame() {
+		if(this.player.hp <= 0){
+			alert('Вы проиграли!');
+		}
+		if(this.player.x == 1218){
+			alert('Вы выйграли!');
+		}
+	}
+
 	drawBackground(){
-		this.painter.drawImage(this.bg, 0, 0, 1280, 720);
+		this.painter.drawImage(this.bg, this.x, this.y, 2560, 720);
 		this.drawGround();
 	}
 

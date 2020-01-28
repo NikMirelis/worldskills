@@ -2,39 +2,39 @@ class Player{
 	constructor(painter){
 		
 		this.hp = 100;
-		console.log(this.hp);
+		
+		this.collEnemy = false;
 
 		this.leftPressed = false;
 		this.rightPressed = false;
 		this.upPressed = false;
 		this.downPressed = false;
 
-		this.height = 30;
-		this.widht = 24;
+		this.height = 60;
+		this.widht = 64;
 		this.jumpCount = 0;
 		this.jumpLength = 50;
 		this.jumpHeight = 0;
 
-		this.playerX = 0;
-		this.playerY = 109;
-
-		this.true = true;
+		this.x = 0;
+		this.playerY = 49;
+		this.basicPlayerY = 49;
 	
 		this.painter = painter;
 		this.img  = new Image();
 		this.img.src = "images/players/timon.png";
 	}
-
+	
 
 	drawPlayer(){
-		this.painter.drawImage(this.img, 18, 0, 24, 30, this.playerX, this.painter.canvas.height - this.height - this.jumpHeight - this.playerY, this.widht*3, this.height*3);
+		this.painter.drawImage(this.img, 18, 0, 24, 30, this.x, this.painter.canvas.height - this.height - this.jumpHeight - this.playerY, this.widht, this.height);
 	}
 
 	movePlayer(){
-		if(this.rightPressed  && this.playerX < this.painter.canvas.width-this.widht && this.playerY > 108) {
-			this.playerX += 7;
-		}else if(this.leftPressed && this.playerX > 0 && this.playerY > 108) {
-			this.playerX -= 7;
+		if(this.rightPressed  && this.x < this.painter.canvas.width-this.widht && this.playerY > this.basicPlayerY - 1) {
+			this.x += 7;
+		}else if(this.leftPressed && this.x > 0 && this.playerY > this.basicPlayerY - 1) {
+			this.x -= 7;
 		}
 		if(this.upPressed){
 			this.jumpCount++;
@@ -45,10 +45,10 @@ class Player{
 			this.upPressed = false;
 			this.jumpHeight = 0;
 		}
-		if(this.downPressed && this.playerY > 20){
+		if(this.downPressed && this.playerY > this.basicPlayerY - this.height && !this.upPressed) {
 			this.playerY -= 9;
 		}
-		if(!this.downPressed && this.playerY < 109) {
+		if(!this.downPressed && this.playerY < this.basicPlayerY) {
 			this.playerY += 9;
 		}
 

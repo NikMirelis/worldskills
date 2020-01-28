@@ -3,31 +3,25 @@ class Enemy {
 		this.painter = painter;
 		this.img = new Image();
 		this.img.src = "images/players/giena.png";
-		this.enemyX = 1100;
-		this.enemyY = 530;
+		this.x = 1100;
+		this.y =  44;
+		this.spanwPoint = 0;
 		this.distanceToPlayer = 1000;
-		this.width = 24;
-		this.height = 30;
+		this.width = 100;
+		this.height = 100;
+		this.leftToPlayer = false;
+		this.rightToPlayer = false;
 
-
+		this.player = new Player();
 	}
 	drawEnemy() {
-		this.painter.drawImage(this.img, 0, 75, 80, 80, this.enemyX, this.enemyY, this.width*5, this.height*5);
+		this.painter.drawImage(this.img, 1270, 155, 80, 70, this.x, this.painter.canvas.height - this.height - this.y, this.width, this.height);
 		this.moveEnemy();
 	}
 
 	moveEnemy() {
-		if(this.distanceToPlayer < 500 && this.distanceToPlayer > -500) {
-			this.enemyX -= 0;
-		}
-		if(game.checkColisionPlayer(this)){
-			this.player.hp -= 100;
-			console.log(this.hp);
-		}
+		this.x -= 7;
 	}
 
-	checkDistanceToPlayer(playerX) {
-		this.distanceToPlayer = this.enemyX - playerX;
-	}
 
 }
