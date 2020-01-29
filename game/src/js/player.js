@@ -26,7 +26,6 @@ class Player{
 
 	draw(){
 		this.painter.drawImage(this.img, 18, 0, 24, 30, this.x, this.painter.canvas.height - this.height - this.jumpHeight - this.y, this.widht, this.height);
-		this.stop();
 		this.move();
 	}
 
@@ -51,17 +50,12 @@ class Player{
 		if(!this.downPressed && this.y < this.basicY) {
 			this.y += 9;
 		}	
+		if(this.x >= ((this.painter.canvas.width-this.widht)/2) && engine.map.x >= -1260){
+			this.x -= 7;
+			engine.map.scroll();
 		}
+	}
 
-		stop() {
-			if(this.x >= ((this.painter.canvas.width-this.widht)/2)) {
-				this.x -= 7;
-				enigne.map.scroll();
-			}
-			if(!enigne.map.bgMove){
-				this.x += 7;
-			}
-		}
 
 
 

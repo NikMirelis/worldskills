@@ -1,4 +1,4 @@
-let enigne = new Enigne();
-enigne.run();
-enigne.damagePerSecond();
+let engine = new Engine();
+engine.run();
+engine.damagePerSecond();
 

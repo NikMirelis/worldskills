@@ -1,4 +1,4 @@
-class Enigne{
+class Engine{
 	constructor(){
 		var canvas = document.getElementById("game");
 		this.painter = canvas.getContext("2d");
@@ -15,7 +15,7 @@ class Enigne{
 	damagePerSecond(){
 		setInterval(() => {
 			this.player.hp -= 1;
-			if(enigne.checkCollisionPlayer(this.enemy)){
+			if(engine.checkCollisionPlayer(this.enemy)){
 				this.player.hp -= 30;
 			}
 		}, 1000);
