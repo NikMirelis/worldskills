@@ -1,4 +1,4 @@
-let game = new Game();
-game.run();
-game.damagePerSecond();
+let enigne = new Enigne();
+enigne.run();
+enigne.damagePerSecond();
 

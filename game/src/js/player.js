@@ -1,39 +1,39 @@
 class Player{
 	constructor(painter){
-		
+		this.painter = painter;
+		this.img  = new Image();
+		this.img.src = "images/players/timon.png";
+
 		this.hp = 100;
-		
-		this.collEnemy = false;
+		this.height = 60;
+		this.widht = 64;
+		this.x = 0;
+		this.y = 49;
+		this.basicY = 49;
 
 		this.leftPressed = false;
 		this.rightPressed = false;
 		this.upPressed = false;
 		this.downPressed = false;
 
-		this.height = 60;
-		this.widht = 64;
 		this.jumpCount = 0;
 		this.jumpLength = 50;
 		this.jumpHeight = 0;
 
-		this.x = 0;
-		this.playerY = 49;
-		this.basicPlayerY = 49;
-	
-		this.painter = painter;
-		this.img  = new Image();
-		this.img.src = "images/players/timon.png";
+		this.collEnemy = false;
 	}
 	
 
-	drawPlayer(){
-		this.painter.drawImage(this.img, 18, 0, 24, 30, this.x, this.painter.canvas.height - this.height - this.jumpHeight - this.playerY, this.widht, this.height);
+	draw(){
+		this.painter.drawImage(this.img, 18, 0, 24, 30, this.x, this.painter.canvas.height - this.height - this.jumpHeight - this.y, this.widht, this.height);
+		this.stop();
+		this.move();
 	}
 
-	movePlayer(){
-		if(this.rightPressed  && this.x < this.painter.canvas.width-this.widht && this.playerY > this.basicPlayerY - 1) {
+	move(){
+		if(this.rightPressed  && this.x < this.painter.canvas.width-this.widht && this.y > this.basicY - 1) {
 			this.x += 7;
-		}else if(this.leftPressed && this.x > 0 && this.playerY > this.basicPlayerY - 1) {
+		}else if(this.leftPressed && this.x > 0 && this.y > this.basicY - 1) {
 			this.x -= 7;
 		}
 		if(this.upPressed){
@@ -45,14 +45,22 @@ class Player{
 			this.upPressed = false;
 			this.jumpHeight = 0;
 		}
-		if(this.downPressed && this.playerY > this.basicPlayerY - this.height && !this.upPressed) {
-			this.playerY -= 9;
+		if(this.downPressed && this.y > this.basicY - this.height && !this.upPressed) {
+			this.y -= 9;
 		}
-		if(!this.downPressed && this.playerY < this.basicPlayerY) {
-			this.playerY += 9;
+		if(!this.downPressed && this.y < this.basicY) {
+			this.y += 9;
+		}	
 		}
 
-		this.drawPlayer()
+		stop() {
+			if(this.x >= ((this.painter.canvas.width-this.widht)/2)) {
+				this.x -= 7;
+				enigne.map.scroll();
+			}
+			if(!enigne.map.bgMove){
+				this.x += 7;
+			}
 		}
 
 
