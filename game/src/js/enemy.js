@@ -1,16 +1,13 @@
 class Enemy {
-	constructor(painter, x, y) {
+	constructor(painter) {
 		this.painter = painter;
 		this.img = new Image();
 		this.img.src = "images/players/giena.png";
+
 		this.x = 400;
 		this.y = 44;
-		this.spanwPoint = 0;
-		this.distanceToPlayer = 1000;
 		this.width = 100;
 		this.height = 100;
-		this.leftToPlayer = false;
-		this.rightToPlayer = false;
 	}
 
 	draw() {
@@ -20,7 +17,7 @@ class Enemy {
 	}
 
 	move() {
-		this.x -= 0;
+		this.x -= 7;
 	}
 
 	attack(){

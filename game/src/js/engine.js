@@ -7,11 +7,9 @@ class Enigne{
 		this.interface = new Interface(this.painter);
 		this.player = new Player(this.painter);
 		this.enemy = new Enemy(this.painter);
-		this.enemys = [];
 
 		document.addEventListener("keydown", this.checkKeyDown.bind(this), false);
 		document.addEventListener("keyup", this.checkKeyUp.bind(this), false);
-
 	}
 
 	damagePerSecond(){
